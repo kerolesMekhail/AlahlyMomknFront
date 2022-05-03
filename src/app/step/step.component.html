@@ -1,0 +1,65 @@
+<section class="ftco-section">
+    <div class="container">
+        <div *ngIf="done">
+            <mat-tab-group mat-align-tabs="start" [(selectedIndex)]="selectedIndex">
+                <mat-tab [label]="step.stepName + ' '  +index+1  " *ngFor="let step of steps let index=index">
+                    <ng-template mat-tab-label>
+                        {{step.stepName}} {{ index+1}}
+                        <span (click)="deleteStep(step.Id,index)" style="margin-left:2rem; font-size: 2rem;" *ngIf="index!=0"> - </span>
+                    </ng-template>
+
+                    <div style="text-align: left;   margin-top: 3rem; ">
+                        <button style="float: right;" (click)="ClearForm()" class="btn btn-primary ">Add New Item </button>
+                        <div *ngFor="let itemStep of step.items let index2=index " (click)="fillForm(itemStep)"> 
+                            
+                            <button class="btn btn-primary">Item {{index2+1}} 
+                                <span (click)="deleteItem(itemStep.Id,index2) " style="margin-left: 1rem;">-</span>
+                             </button >
+
+                            <hr style="width:100%; color: bule;" />
+
+                            <li style="margin-top: 1rem">
+                                {{itemStep.Title}}
+                            </li>
+                            <li style=" margin-bottom: 1rem;">
+                                {{itemStep.Description}}
+                            </li>
+                        </div>
+                    </div>
+                    <span style=" margin-top: 4REM; " class="btn btn-primary">Add/Edit</span>
+                    <hr style="width: 100%;" />
+                    <div class="form-group row " style="width: 100%;">
+                        <div class="form-group row">
+                            <label for="Title" class="col-sm-2 col-form-label">Title</label>
+                            <div class="col-sm-4">
+                                <input type="text " class="form-control " style="width:100% " placeholder="Title " required=" " name="title " [(ngModel)]="item.title ">
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="form-group row">
+                            <label for="Title" class="col-sm-2 col-form-label">Description</label>
+                            <div class="col-sm-4">
+                                <input type=" text " class="form-control " style="width:100% " placeholder="Description " required=" " name="description " [(ngModel)]="item.description "> 
+                            </div>
+                            <div class="col-md-3 " style="float: left !important;">
+                                <button (click)="Add_EditItem() " class="btn btn-primary ">Save </button>
+                            </div>
+                        </div>
+                        </div>
+
+
+                    <br> <br>
+                    <button (click)="Pervious(index) " class="btn btn-primary mb-5 " style="margin-right: 5REM; ">Pervious </button>
+                    <button (click)="Next(index) " class="btn btn-primary mb-5"> next </button>
+
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <span (click)="addNewStep();  " style="margin-left: 1rem; font-size: 2rem;"> +</span>
+                    </ng-template>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</section>
